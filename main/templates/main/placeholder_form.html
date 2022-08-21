@@ -1,0 +1,295 @@
+{% extends './base.html' %}
+{% load static %}
+<!--主体表单模块-->
+{% block head %}
+<style>
+    .card {
+        margin: 10px;
+    }
+    .card-header * {
+        display: inline-block;
+    }
+    .card-body {
+        margin-left: 30px;
+    }
+    .image-pad {
+        width: 50%;
+        margin: 10px;
+        margin-left: 25%;
+    }
+    .loaded-image {
+        width: 100%;
+        margin-bottom: 5px;
+    }
+    .image-pad .btn {
+        position: relative;
+    }
+    .image-pad input {
+        width: 50px;
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+    }
+    .input-select {
+        width: 20px;
+        display: inline-block;
+        transform: translateX(-30px);
+        background-color: white;
+        border: none;
+    }
+</style>
+{% endblock %}
+
+{% block body %}
+<form action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    文件名: {{ ph.filename }}.docx <button type="submit" class="btn btn-light float-end"><i class="fa fa-check"></i> 确 认</button>
+    <div class="card">
+        <div class="card-header">
+            <h3 data-bs-toggle="collapse" href="#c_fengye">封页</h3>
+        </div>
+        <div class="card-body show" id="c_fengye">
+            <p>
+                {{ ph0.d0 }}公司申请{{ ph0.d1 }}万元
+                城乡一体化贷款（项目）评估报告
+                （评估建议{{ ph0.d1_m }}万元）
+            </p>
+            <p>
+                调查评估部门： {{ ph0.d2 }}
+                调查评估人员：{{ ph0.d3_m }}（主调查人） {{ ph0.d3_s }}
+            </p>
+            <p>
+                调查评估部门负责人：{{ ph0.d4_0 }}   {{ ph0.d4_1 }}
+                调查评估部门分管行长：{{ ph0.d5 }}
+            </p>
+            <p>
+                调查评估时间：{{ ph0.d6_y }}年{{ ph0.d6_m }}月
+            </p>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <h3 data-bs-toggle="collapse" href="#c_pinggurenyuan">评估人员</h3>
+        </div>
+        <div class="card-body show" id="c_pinggurenyuan">
+            <p>
+                调查评估中心       {{ ph0.dr0_m }}（主调查人）
+                {{ ph0.dr0_s }}
+            </p>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <h3 data-bs-toggle="collapse" href="#c_list">目录</h3>
+        </div>
+        <div class="card-body show" id="c_list">
+            <p>
+                我中心收到{{ ph0.l0 }}行上报的{{ ph0.l1 }}公司{{ ph0.l2 }}万元城乡一体化贷款（项目）申请及相关报批材料后，报经市分行分管行领导同意，依据国家相关政策和我行相关信贷管理制度，对本项目进行了现场评估，现将评估情况报告如下：
+            </p>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <h3 data-bs-toggle="collapse" href="#c_1">第一章&nbsp;&nbsp;项目概述</h3>
+        </div>
+        <div class="card-body show" id="c_1">
+            <div class="card">
+                <div class="card-header">
+                    <h4 data-bs-toggle="collapse" href="#c_11">1.1项目名称</h4>
+                </div>
+                <div class="card-body show" id="c_11">
+                    <p>{{ ph1.m110 }}项目（以下简称“本项目”）</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <h4 data-bs-toggle="collapse" href="#c_12">1.2项目立项及可研批复情况</h4>
+                </div>
+                <div class="card-body show" id="c_12">
+                    <p>{{ ph1.m120 }}年{{ ph1.m121 }}月，{{ ph1.m123 }}区（县）发改委出具了《{{ ph1.m124 }}立项的批复》（文号）（以下简称“《立项批复》”），同意本项目建设。项目编码：{{ ph1.m125 }}。</p>
+                    <p>{{ ph1.m126 }}年{{ ph1.m127 }}月，{{ ph1.m128 }}公司编制了《{{ ph1.m129 }}可行性研究报告》（以下简称“《可研报告》”）。可研公司资格等级：{{ ph1.m1210 }}级，符合我行相关规定。</p>
+                    <p>{{ ph1.m1211 }}年{{ ph1.m1212 }}月，{{ ph1.m1213 }}区（县）发改委出具了《{{ ph1.m1214 }}可行性研究报告的批复》（文号）（以下简称“《可研批复》”），同意本项目的可行性研究报告。</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <h4 data-bs-toggle="collapse" href="#c_13">1.3项目性质及类型</h4>
+                </div>
+                <div class="card-body show" id="c_13">
+                    {{ ph1.m130 }}法人，{{ ph1.m131 }}项目。
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <h4 data-bs-toggle="collapse" href="#c_14">1.4项目承贷主体</h4>
+                </div>
+                <div class="card-body show" id="c_14">
+                    {{ ph1.m140 }}公司（以下简称“{{ ph1.m141 }}公司”）。
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <h4 data-bs-toggle="collapse" href="#c_15">1.5项目建设地址</h4>
+                </div>
+                <div class="card-body show" id="c_15">
+                    本项目建设地点位于{{ ph1.m150 }}。经查询国家统计局官方网站2020年统计用区划和城乡划分代码，城乡分类代码为{{ ph1.m151 }}。按照《关于明确基础设施信贷业务城乡边界的通知》（农发银办〔2020〕61号）要求，项目建设地行政区划属于我行可支持范围。（主城、万涪黔三个二级分行参考表述）
+                    本项目建设地点位于{{ ph1.m152 }}。经查国家统计局官方网站2020年统计用规划和城乡划分代码，城乡分类代码为{{ ph1.m153 }}。按照《关于明确基础设施信贷业务城乡边界的通知》（农发银办〔2020〕61号）要求，经查阅《中国县域统计年鉴—2019（县市卷）》（中国统计出版社，国家统计局农村社会经济调查司编），{{ ph1.m154 }}区（县）已列入该统计年鉴统计范围，项目建设地行政区划属于我行可支持范围。（其他区县行参考表述）
+                    <div class="image-pad">
+                        {{ ph1.i155 }}
+                    </div>
+                    <div class="image-pad">
+                        {{ ph1.i156 }}
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <h4 data-bs-toggle="collapse" href="#c_16">1.6项目建设内容及规模</h4>
+                </div>
+                <div class="card-body show" id="c_16">
+                    根据《{{ ph1.m160 }}批复》，本项目建设内容主要包括{{ ph1.m161 }}工程，建设规模{{ ph1.m162 }}。
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <h4 data-bs-toggle="collapse" href="#c_17">1.7项目运作模式</h4>
+                </div>
+                <div class="card-body show" id="c_17">
+                    本项目实行“{{ ph1.m170 }}”模式，由{{ ph1.m171 }}公司作为项目业主，负责本项目建设、运营和管理。贷款本息由{{ ph1.m172 }}收益进行偿还。
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <h4 data-bs-toggle="collapse" href="#c_18">1.8项目投资规模及资金筹措</h4>
+                </div>
+                <div class="card-body show" id="c_18">
+                    根据《{{ ph1.m180 }}批复》，项目总投资{{ ph1.m181 }}万元。经评估，本项目总投资{{ ph1.m182 }}万元，相差{{ ph1.m183 }}万元，主要原因是{{ ph1.m184 }}。其中：建设投资{{ ph1.m185 }}万元，建设期利息{{ ph1.m186 }}万元。建设投资包括工程费用{{ ph1.m187 }}万元，工程建设其他费用{{ ph1.m188 }}万元，基本预备费{{ ph1.m189 }}万元。
+                    资金来源为：项目资本金{{ ph1.m1810 }}万元，由{{ ph1.m1811 }}公司自筹，占总投资比例为{{ ph1.m1812 }}%；申请我行贷款{{ ph1.m1813 }}万元，占总投资比例为{{ ph1.m1814 }}%；其他资金{{ ph1.m1815 }}万元，由{{ ph1.m1816 }}公司筹集，占总投资比例为{{ ph1.m1817 }}%。符合我行和国家资本金管理相关规定。
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <h4 data-bs-toggle="collapse" href="#c_19">1.9申请贷款情况及贷款建议</h4>
+                </div>
+                <div class="card-body show" id="c_19">
+                    {{ ph1.m190 }}公司向我行申请城乡一体化贷款（项目）{{ ph1.m191 }}万元，期限{{ ph1.m192 }}年（含宽限期{{ ph1.m193 }}年）。
+                    经评估，建议向{{ ph1.m194 }}公司发放城乡一体化贷款（项目）{{ ph1.m195 }}万元，较申请金额调减或调增{{ ph1.m196 }}万元，主要是由于{{ ph1.m197 }}。用于{{ ph1.m198 }}项目，期限{{ ph1.m199 }}年（含宽限期{{ ph1.m1910 }}年），该项目属于（非）绿色信贷项目。贷款利率按全国银行间同业拆借中心公布的5年期以上贷款市场报价利率LPR基础上加{{ ph1.m1911 }}个基点执行，按半年调整，按季结息。贷款逾期自逾期之日起，在合同利率上加罚息{{ ph1.m1912 }}%，未按合同约定用途使用贷款，自改变合同用途之日起，在合同利率基础上加罚息{{ ph1.m1913 }}%。贷款采用{{ ph1.m1914 }}担保方式。
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <h3 data-bs-toggle="collapse" href="#c_2">第二章&nbsp;&nbsp;客户评估</h3>
+        </div>
+        <div class="card-body show" id="c_2">
+            <div class="card">
+                <div class="card-header">
+                    <h4 data-bs-toggle="collapse" href="#c_21">2.1客户概况</h4>
+                </div>
+                <div class="card-body show" id="c_21">
+                    {{ ph2.m2_1_0 }}公司于{{ ph2.m2_1_1 }}年成立，法定代表人{{ ph2.m2_1_2 }}，注册地址：{{ ph2.m2_1_3 }}，股东为{{ ph2.m2_1_4 }}，注册资本{{ ph2.m2_1_5 }}万元，实收资本{{ ph2.m2_1_6 }}万元，现有职工{{ ph2.m2_1_7 }}人。在农发行{{ ph2.m2_1_8 }}行开立{{ ph2.m2_1_9 }}账户。{{ ph2.m2_1_10 }}公司不涉及地方政府隐性债务。
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <h4 data-bs-toggle="collapse" href="#c_22">2.2集团客户认定情况</h4>
+                </div>
+                <div class="card-body show" id="c_22">
+                    {{ ph2.m2_2_0 }}年{{ ph2.m2_2_1 }}月经市分行认定，将{{ ph2.m2_2_2 }}公司、{{ ph2.m2_2_3 }}公司...纳入{{ ph2.m2_2_4 }}集团进行管理。{{ ph2.m2_2_5 }}集团{{ ph2.m2_2_6 }}年度核定最高授信额度{{ ph2.m2_2_7 }}万元，其中：{{ ph2.m2_2_8 }}公司政策指导性专项授信额度{{ ph2.m2_2_9 }}万元，{{ ph2.m2_2_10 }}公司政策指导性专项授信额度{{ ph2.m2_2_11 }}万元；预留额度{{ ph2.m2_2_12 }}万元，本笔贷款使用预留额度。
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <h4 data-bs-toggle="collapse" href="#c_23">2.3股权结构</h4>
+                </div>
+                <div class="card-body show" id="c_23">
+                    {{ ph2.m2_3_0 }}公司于{{ ph2.m2_3_1 }}年{{ ph2.m2_3_2 }}月经工商部门依法注册成立，现注册资本为{{ ph2.m2_3_3 }}万元，实收资本为{{ ph2.m2_3_4 }}万元。股权变动情况详见下表：（表2.3 股权变动情况表）
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <h4 data-bs-toggle="collapse" href="#c_24">2.4组织结构及经营人员素质</h4>
+                </div>
+                <div class="card-body show" id="c_24">
+                    <div class="card">
+                        <div class="card-header">
+                             <h4 data-bs-toggle="collapse" href="#c_241">2.4.1组织结构</h4>
+                        </div>
+                        <div class="card-body show" id="c_241">
+                            {{ ph2.m2_4_1_0 }}公司依照《公司法》成立，设有股东会、董事会、监事会。公司下设{{ ph2.m2_4_1_1 }}、{{ ph2.m2_4_1_2 }}、{{ ph2.m2_4_1_3 }}等{{ ph2.m2_4_1_4 }}个部门。现有员工{{ ph2.m2_4_1_5 }}人。公司组织机构健全、内部机构及岗位职责明确。
+                        </div>
+                        <div class="card-header">
+                             <h4 data-bs-toggle="collapse" href="#c_242">2.4.2经营人员素质</h4>
+                        </div>
+                        <div class="card-body show" id="c_242">
+                            <p>法定代表人、董事长：{{ ph2.m2_4_2_0 }}，{{ ph2.m2_4_2_1 }}，{{ ph2.m2_4_2_2 }}年{{ ph2.m2_4_2_3 }}月出生，{{ ph2.m2_4_2_4 }}学历，{{ ph2.m2_4_2_5 }}，{{ ph2.m2_4_2_6 }}年{{ ph2.m2_4_2_7 }}月参加工作，先后在{{ ph2.m2_4_2_8 }}公司、{{ ph2.m2_4_2_9 }}公司、{{ ph2.m2_4_2_10 }}公司任职（提示:任职经历仅描述以往工作单位或公司情况，不描述工作起止时间）。{{ ph2.m2_4_2_11 }}年{{ ph2.m2_4_2_12 }}月至今担任{{ ph2.m2_4_2_13 }}公司法人、董事长。</p>
+                            <p>总经理：{{ ph2.m2_4_2_14 }}，{{ ph2.m2_4_2_15 }}，{{ ph2.m2_4_2_16 }}年{{ ph2.m2_4_2_17 }}月出生，{{ ph2.m2_4_2_18 }}学历，{{ ph2.m2_4_2_19 }}，{{ ph2.m2_4_2_20 }}年{{ ph2.m2_4_2_21 }}月参加工作，先后在{{ ph2.m2_4_2_22 }}公司、{{ ph2.m2_4_2_23 }}公司、{{ ph2.m2_4_2_24 }}公司任职（提示:任职经历仅描述以往工作单位或公司情况，不描述工作起止时间）。{{ ph2.m2_4_2_25 }}年{{ ph2.m2_4_2_26 }}月至今担任{{ ph2.m2_4_2_27 }}公司总经理。</p>
+                            <p>财务负责人：{{ ph2.m2_4_2_28 }}，{{ ph2.m2_4_2_29 }}，{{ ph2.m2_4_2_30 }}年{{ ph2.m2_4_2_31 }}月出生，{{ ph2.m2_4_2_32 }}学历，{{ ph2.m2_4_2_33 }}，{{ ph2.m2_4_2_34 }}年{{ ph2.m2_4_2_35 }}月参加工作，先后在{{ ph2.m2_4_2_36 }}公司、{{ ph2.m2_4_2_37 }}公司、{{ ph2.m2_4_2_38 }}公司任职（提示:任职经历仅描述以往工作单位或公司情况，不描述工作起止时间）。{{ ph2.m2_4_2_39 }}年{{ ph2.m2_4_2_40 }}月至今担任{{ ph2.m2_4_2_41 }}公司财务负责人。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-light float-end"><i class="fa fa-check"></i> 确 认</button>
+
+</form>
+
+<script>
+    document.getElementById("id_m2_1_10").setAttribute("placeholder","如涉及，此处无需表述");
+    $("input[type='text']").addClass("form-control w100");
+    ["filename", "d0", "d2", "m110", "m128", "m131", "m140", "m150", "m152", "m170"].map(id => $(`#id_${id}`).removeClass("w100").addClass("w200"));
+    const makeImageAwesome = (id, more) => {
+        const cont = $(`#${id}`).parent();
+        const url = cont.find('a').length ? cont.find('a').attr("href") : "{% static 'images/empty.png' %}";
+        cont.html(`
+            <img src="${url}" class="loaded-image">
+            <p class="btn btn-light"><i class="fa fa-upload"></i> 导入图片<input type="file" name="${id.slice(3)}" accept="image/*" id="${id}"></p>
+            ${more}
+        `);
+        cont.find("input").change(function() {
+            if (!this.files) return;
+            const loaded_image_file = this.files[0];
+            const url = window.URL.createObjectURL(loaded_image_file);
+            cont.find("img").attr("src", url);
+        });
+    };
+    makeImageAwesome("id_i155", "图1.1 区域位置图");
+    makeImageAwesome("id_i156", "图1.2 项目现场图");
+    const makeSelectable = (id, lst) => {
+        let options = '';
+        for (let v of lst) {
+            options += `<option value="${v}">&nbsp;&nbsp;&nbsp;${v}</option>`;
+        }
+        const selitm = $(`
+            <select class="input-select">
+                ${options}
+            </select>
+        `);
+        $('#' + id).after(selitm);
+        selitm.change(() => {
+            console.log(selitm.val());
+            $('#' + id).val(selitm.val());
+        });
+        if ($('#' + id).val().length === 0)
+            $('#' + id).val(lst[0]);
+    };
+    makeSelectable("id_m130", ["既有", "新设"]);
+    makeSelectable("id_m131", ["新建", "改扩建"]);
+    makeSelectable("id_m170", ["公司自营", "EPC", "PPP"]);
+    makeSelectable("id_m2_1_9", ["基本存款账户", "一般存款账户", "专用存款账户"]);
+    makeSelectable("id_m2_4_2_1", ["男", "女"]);
+    makeSelectable("id_m2_4_2_5", ["中共党员", "群众"]);
+    makeSelectable("id_m2_4_2_15", ["男", "女"]);
+    makeSelectable("id_m2_4_2_19", ["中共党员", "群众"]);
+    makeSelectable("id_m2_4_2_29", ["男", "女"]);
+    makeSelectable("id_m2_4_2_33", ["中共党员", "群众"]);
+
+
+
+</script>
+{% endblock %}

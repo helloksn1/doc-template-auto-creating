@@ -1,0 +1,70 @@
+{% extends './base.html' %}
+
+{% block head %}
+<style>
+    html, body {
+        height: 100%;
+    }
+    .cont {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 10%;
+    }
+    form {
+        width: 300px;
+        padding: 20px;
+    }
+</style>
+{% endblock %}
+
+{% block body %}
+<div class="cont">
+    <form method="post" class="card">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="password" class="form-label">密码</label>
+            <input type="password" id="password" name="password" class="form-control {% if status %}is-invalid{% endif %}" placeholder="密码" required="">
+        </div>
+        <div class="mb-3">
+            <label for="newpassword" class="form-label">新密码</label>
+            <input type="password" id="newpassword" name="newpassword" class="form-control" placeholder="新密码" required="">
+        </div>
+        <div class="mb-3">
+            <label for="renewpassword" class="form-label">确认新密码</label>
+            <input type="password" id="renewpassword" name="renewpassword" class="form-control" placeholder="确认新密码" required="">
+        </div>
+        <button type="submit" class="btn btn-light form-control" id="check"><i class="fa fa-check"></i> 确 认</button>
+    </form>
+</div>
+<script>
+    $("#check").click((e) => {
+        const password = $("#password").val();
+        const newpassword = $("#newpassword").val();
+        const renewpassword = $("#renewpassword").val();
+        const username = $("#username").val();
+        const org = $("#org").val();
+        const sex = $("#sex").val();
+        if (password === '') {
+            e.preventDefault();
+            $("#password").addClass("is-invalid");
+        }
+        else {
+            $("#password").removeClass("is-invalid");
+        }
+        if (newpassword == '' || newpassword !== renewpassword) {
+            e.preventDefault();
+            $("#newpassword").addClass("is-invalid");
+            $("#renewpassword").addClass("is-invalid");
+        }
+        else {
+            $("#newpassword").removeClass("is-invalid");
+            $("#renewpassword").removeClass("is-invalid");
+        }
+        if (password && password === newpassword) {
+            $("#password").addClass("is-invalid");
+            $("#newpassword").addClass("is-invalid");
+        }
+    });
+</script>
+{% endblock %}

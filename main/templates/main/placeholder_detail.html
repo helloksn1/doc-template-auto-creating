@@ -1,0 +1,9 @@
+{% extends './base.html' %}
+<!--列表对象链接模块-->
+{% block body %}
+<a href="{% url 'list' %}">List</a>
+{{ object.filename }}
+<a href="{% url 'update' pk=object.pk %}">编辑</a>
+<a href="{% url 'delete' pk=object.pk %}">删除</a>
+<a href="{% url 'docx' pk=placeholder.pk %}">导出</a>
+{% endblock %}

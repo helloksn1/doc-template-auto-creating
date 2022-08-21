@@ -1,0 +1,8 @@
+{% extends './base.html' %}
+<!--删除确定模块-->
+{% block body %}
+<form method="post">{% csrf_token %}
+    真的要删除 {{ object.filename }}吗?
+    <button type="submit" class="btn btn-light">确认</button>
+</form>
+{% endblock %}

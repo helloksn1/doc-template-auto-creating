@@ -1,0 +1,61 @@
+{% extends './base.html' %}
+<!--列表模块-->
+{% block head %}
+<style>
+    h1 {
+        text-align: center;
+    }
+</style>
+{% endblock %}
+
+{% block list-link %}
+active
+{% endblock %}
+
+{% block body %}
+<div class="list-group list-group-flush">
+    {% if object_list.count %}
+    <div class="list-group-item">
+        <input type="checkbox" class="form-check-input" id="select_all">
+        <button id="get_words" class="btn btn-light float-end"><i class="fa fa-file-word-o"></i> 导 出</button>
+    </div>
+    {% endif %}
+    {% for placeholder in object_list %}
+        <div class="list-group-item">
+            <input type="checkbox" class="form-check-input ph-check" id="down_{{ placeholder.pk }}">
+            <!-- <a href="{% url 'detail' pk=placeholder.pk %}">{{ placeholder.filename }}.docx</a> -->
+            <span>{{ placeholder.filename }}</span>
+            <div class="btn-group" role="group" style="float: right;">
+                <a href="{% url 'update' pk=placeholder.pk %}" class="btn btn-light"><i class="fa fa-edit"></i> 编 辑</a>
+                <a href="{% url 'delete' pk=placeholder.pk %}" class="btn btn-light"><i class="fa fa-remove"></i> 删 除</a>
+                <a href="{% url 'docx' pk=placeholder.pk %}" class="btn btn-light"><i class="fa fa-file-word-o"></i> 导 出</a>
+            </div>
+        </div>
+    {% empty %}
+        <h1>没有数据，添加新的</h1>
+    {% endfor %}
+</div>
+
+<script>
+    $("#get_words").click(async () => {
+        const ids_list = $(".ph-check").filter((idx, ele) => $(ele).is(':checked')).map((idx, ele) => $(ele).attr("id").slice(5));
+        if (ids_list.length === 0) {
+            alert('选择要导出的目录');
+            return;
+        }
+        const ids = [];
+        for (let id of ids_list)
+            ids.push(id);
+        console.log(ids);
+        location.href = `{% url 'docxlist' %}?ids=${JSON.stringify(ids)}`
+    });
+
+    $("#select_all").click(() => {
+        const sts = $("#select_all").is(":checked");
+        $(".ph-check").map((idx, ele) => {
+            if ($(ele).is(":checked") !== sts)
+                $(ele).click();
+        });
+    });
+</script>
+{% endblock %}
